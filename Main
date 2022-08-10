@@ -1,0 +1,55 @@
+class Main { 
+  public static void main(String[] args) {
+    
+    // Creating All my Team Objects
+    Team a = new Team("Knicks", 400000, "Josh Allen");
+    Team b = new Team("Nets", 40000000, "Patrick Trash");
+    Team c = new Team("Broncos", "Drew Lock");
+    Team d = new Team("Steelers", "Big Ben");
+    Team e = new Team("Patriots" , "Mac Jonas Brother");
+    Team f = new Team("Cowboys", "Dak Prescott");
+    Team g = new Team("Giants", "Daniel Jones");
+    Team h = new Team("Jets", "Butt Fumble");
+    Team i = new Team("Dolphins", "Tua Turndaballova");
+    Team j = new Team("Bengals", "Bomma Burrow");
+    Team k = new Team("Browns", "Baker");
+    Team l = new Team("Chargers", "J Herb");
+    Team m = new Team("Raiders", "DC");
+    Team n = new Team("49ers", "JIMMY G");
+    Team o = new Team("Packers", "Aaron Fraudgers");
+    Team p = new Team("Bucaneers", "Tom Retired");
+    Team q = new Team("Saints", "Famous Jamis");
+    Team r = new Team("Washington", "Taylor Heineke");
+    Team s = new Team("Ealges", "Jalen Hurts");
+    Team t = new Team("Colts", "Carson Injured");
+
+    // Creating Game Objects
+    Game ab = new Game(a, b);
+    Game ad = new Game(a, d);
+    Game bc = new Game(b, c);
+    Game cd = new Game(c, d);
+    Game rs = new Game(r, s);
+
+    // Simulating Games
+    System.out.println("----------------------------------------------");
+    ab.playGameFull(10);
+     System.out.println("----------------------------------------------");
+    ad.playGameFull(1);
+     System.out.println("----------------------------------------------");
+    bc.playGameFull(1);
+     System.out.println("----------------------------------------------");
+    cd.playGameHalf();
+     System.out.println("----------------------------------------------");
+    rs.playGameHalf();
+     System.out.println("----------------------------------------------");
+    a.qbStats();
+     System.out.println("----------------------------------------------");
+    
+    // Showing my Qb STATS WOrk
+    b.qbStats();
+    b.setQb("Mitch Trubisky");
+    b.qbStats();
+    
+    
+  }
+}
