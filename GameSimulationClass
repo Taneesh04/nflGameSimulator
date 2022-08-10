@@ -1,0 +1,186 @@
+import java.util.Scanner;
+class Game // Making the team class to make teams to simulate game
+{
+  private Team home;
+  private Team away;
+  private int hscore;
+  private int ascore;
+  private boolean playoffs;
+
+
+
+// Making my object constructors
+  public Game(Team hteam, Team ateam, boolean isp)
+  {
+     home = hteam;
+     away = ateam;
+     hscore = 0;
+     ascore = 0;
+     playoffs = isp;
+  }
+  public Game(Team hteam, Team ateam)
+  {
+     home = hteam;
+     away = ateam;
+     hscore = 0;
+     ascore = 0;
+     playoffs = true;
+  }
+
+// Getter Methods for Simplicity
+public Team getHomeTeam()
+{
+  return home;
+}
+public Team getRoadTeam()
+{
+  return away;
+}
+
+
+// Will Simulate the play by play (int t is more amount of posessions)
+  public void playGameFull(int t)
+  {
+    System.out.println("Beginning game simulation between the " + home.getTeamName() + " who are at home and " + away.getTeamName() + ".");
+    Scanner input = new Scanner(System.in);
+    for(int g = 1; g <= t; g++)
+    {
+      System.out.println("Would you like to begin the play by play for possesion " + g + " Please input true or false." );  
+      boolean r = input.nextBoolean();
+      if(r == true)
+      {
+      home.playByPlay(this);
+      }
+      System.out.println("Would you like to continue to the away play by play? Input true or false.");
+      r = input.nextBoolean();
+      if(r == true)
+      {
+      away.playByPlay(this);
+      }
+
+    }
+    home.record(this); //Prints out the team records
+  } 
+
+  // getScore Method used in team class
+  public void getScore(Team fTeam)
+  {
+   if(home == fTeam)
+   {
+      System.out.print(hscore); 
+   }
+   else if(away == fTeam)
+   {
+      System.out.print(ascore);
+   }
+  
+  }
+
+// Specific Methods to be used to determine wins or losses.
+  public int getHomeScore()
+  {
+    return hscore;
+  }
+
+  public int getRoadScore()
+  {
+    return ascore;
+  }
+
+
+// Simplifies the whole process of playing a game non play by play
+  public void playGameHalf()
+  {
+    this.playQuarter(1, home, away);
+    this.playQuarter(2, home, away);
+    this.playQuarter(3, home, away);
+    this.playQuarter(4, home, away);
+     home.record(this);
+  }
+
+  // Simulates one quarter with Math.Random
+  public void playQuarter(int quarternum, Team whatTeam, Team otherTeam)
+  {
+    home = whatTeam;
+    away = otherTeam;
+    System.out.println();
+    System.out.println("-------------------------------");
+    System.out.println("Beginning Simulation for the " + home.getTeamName() + " for quarter number " + quarternum);
+    String hg = whatTeam.getTeamName();
+    String gg = otherTeam.getTeamName();
+    int quarter = (int) (Math.random() * 14);
+     
+     // Rigging Process
+     if(gg.equals("Bills"))
+    {
+      quarter = 12;
+    }
+    else if(hg.equals("Bills"))
+    {
+      quarter = 12;
+    }
+    // Quarter = 11 to get Maximum Points for Bills
+    if(quarter < 3)
+    {
+      int fpoints = (int) (Math.random() * 3);
+      hscore += fpoints;
+    }
+    else if(quarter < 10)
+    {
+      int fpoints = (int) (Math.random() * 7 + 3);
+      hscore += fpoints;
+    }   
+        else if(quarter < 12)
+    {
+      int fpoints = (int) (Math.random() * 14 + 7);
+      hscore += fpoints;
+    }    
+     else
+    {
+      int fpoints = (int) (Math.random() * 21 + 7);
+      hscore += fpoints;
+    }    
+    // Print Statement to finish simulation
+    System.out.println(home.getTeamName() + " have scored a total of " + hscore + " points so far in the game");
+    System.out.println("Beginning Simulation for the " + away.getTeamName() + " for quarter number " + quarternum);
+    int aquarter = (int) (Math.random() * 14);
+    if(aquarter < 3)
+    {
+      int fpoints = (int) (Math.random() * 3);
+      ascore += fpoints;
+    }
+    else if(aquarter < 7)
+    {
+      int fpoints = (int) (Math.random() * 7 + 3);
+      ascore += fpoints;
+    }   
+        else if(aquarter < 10)
+    {
+      int fpoints = (int) (Math.random() * 14 + 7);
+      ascore += fpoints;
+    }    
+     else
+    {
+      int fpoints = (int) (Math.random() * 21 + 7);
+      ascore += fpoints;
+    }    
+    System.out.println(away.getTeamName() + " have scored a total of " + ascore + " points in the game");
+    System.out.println();
+   
+   }
+  
+
+  // Add Points Method to Add the Points in a play by play process
+ public void addPoints(Team fTeam, int hpoints)
+ {
+   if(home == fTeam)
+   {
+     hscore += hpoints; 
+   }
+   else if(away == fTeam)
+   {
+     ascore += hpoints;
+   }
+ }   
+
+}
