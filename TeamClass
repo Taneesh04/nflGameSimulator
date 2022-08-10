@@ -1,0 +1,243 @@
+class Team // Making the team class to make teams to simulate game
+{
+  private String name;
+  private int salarycap;
+  private String quarterback;
+  private Game g;
+  private int wins;
+  private int losses;
+ 
+ // Creating Multiple objects, one with a possible manual salary cap, one with a set salarycap
+  public Team(String teamName, int cap, String qb)
+  {
+    name = teamName;
+    salarycap = cap;
+    quarterback = qb; 
+    wins = 0;
+    losses = 0;   
+  }
+  public Team(String teamName, String qb)
+  {
+    name = teamName;
+    quarterback = qb;
+    salarycap = 5000000;
+    wins = 0;
+    losses = 0; 
+  }
+ 
+ 
+ // Making my getter methods
+  public String getTeamName()
+  {
+    return name;
+  }
+  public String getQB()
+  {
+    return quarterback;
+  }  
+    public int getCap()
+  {
+    return salarycap;
+  }  
+
+
+  // Making my setter methods
+  public void setCap(int cap)
+  {
+    salarycap = cap;
+  }
+   public void setQb(String qb)
+  {
+    int salary = (int) (Math.random() * 1000000 + 1000000);
+    if(salary < salarycap)
+    {
+    quarterback = qb;
+    System.out.println("You are signing " + quarterback + " from free agency. His salary is $" + salary);
+    }
+    else
+    {
+      System.out.println("You do not have the salary to sign " + quarterback + ". Signing him would put you $" + (salary - salarycap) + " over the cap");
+    } 
+  }
+
+  // Getting the Stats of the Quarterback
+  public void qbStats()
+  {
+    double qBR = 0.0;
+    String t = this.getQB();
+    String x = "Josh Allen";
+    if(t.equals(x))
+    {
+      qBR = 99.0;
+    }
+    else
+    {
+      int add = (int) (Math.random() * 98);
+      qBR += add;
+
+    }
+    System.out.println(this.getQB() + "'s Quarterback rating is " + qBR);
+  }
+  public void addWin()
+    {
+      wins++;
+    }
+   public void addLoss()
+    {
+      losses++;
+    }
+
+    public int getLosses()
+    {
+      return losses;
+    }
+    public int getWins()
+    {
+      return wins;
+    }    
+
+
+    // PlaybyPlay Method to have a more definite game
+   public void playByPlay(Game a)
+   {
+      int totalyards = 0;
+      int b = 0;
+      for (int x = 1; x < 10 ; x++) 
+      {
+      int yardsonPossession = 0; 
+        for(int y = 1; y <=4; y++)
+        {
+          
+          int playcount = (int) (Math.random() * 100);
+          String hg = this.getTeamName();
+          if(hg.equals("Bills"))
+          {
+            playcount = 83;
+          }
+          if(playcount < 5)
+          {
+            b = -10;
+            yardsonPossession -= 10;
+            totalyards -= 10;
+          }
+          else if(playcount < 15)
+          {
+            b = 0;
+            yardsonPossession += 0;
+            totalyards += 0;
+          }
+          else if(playcount < 35)
+          {
+            b = 2;
+            yardsonPossession += 2;
+            totalyards += 2;
+          }
+          else if(playcount < 50)
+          {
+             b = 3;
+             yardsonPossession += 3;
+             totalyards += 3;
+          }
+          else if(playcount < 64)
+          {
+            b = 4;
+             yardsonPossession += 4;
+             totalyards += 4;
+          }
+          else if(playcount < 74)
+          {
+            b = 5;
+             yardsonPossession += 5;
+             totalyards += 5;
+          }
+          else if(playcount < 79)
+          {
+            b = 6;
+             yardsonPossession += 6;
+             totalyards += 6;
+          }
+          else if(playcount < 84)
+          {
+            b = 15;
+             yardsonPossession += 15;
+             totalyards += 15;
+          }
+          else if(playcount < 89)
+          {
+            b = 20;
+             yardsonPossession += 20;
+             totalyards += 20;
+          }
+          else if(playcount < 94)
+          {
+            b = 30;
+             yardsonPossession += 30;
+             totalyards += 30;
+          }
+          else if(playcount < 99)
+          {
+            b = 50;
+             yardsonPossession += 50;
+             totalyards += 50;
+          }
+          else if(playcount < 100)
+          {
+            b = 100;
+             yardsonPossession += 100;
+             totalyards += 100;
+          }
+          // Utiilizing other methods I made in order to simplify the play by play process
+          System.out.println("This is their #" + x + " set of downs this drive. On this play they gained " + b + " yards. The " + this.getTeamName() +  " traveled "  + yardsonPossession + " yards so far on this set of downs. The total yards this drive are " + totalyards);
+          System.out.println();
+          System.out.println();
+          if(totalyards < 0)
+          {
+            System.out.println("Safety! In this simulation a safety subtracts 2 points from you.");
+            a.addPoints(this, -2);
+          System.out.print("The Score is now ");   a.getScore(this);
+          System.out.println( " " + this.getTeamName());
+          System.out.println();
+            break;
+          }
+          else if(yardsonPossession >= 10)
+          {
+            break;
+          }
+        }
+          if (totalyards >= 100)
+        {
+          System.out.println("TOUCHDOWN!!!"); // Utilizing the touchdown
+          a.addPoints(this, 7);
+          System.out.print("The Score is now ");   a.getScore(this);
+          System.out.println( " " + this.getTeamName());
+          System.out.println();
+          break;
+        }
+        if(yardsonPossession < 0)
+          {
+            break;
+          }
+      } 
+   }
+  public void record(Game s)
+  // Changes the record of teams based on their winning or losing of a game, referenced in playGamehalf and playgmae full methods
+  {
+    int ha = s.getHomeScore();
+    int ra = s.getRoadScore();
+    Team r = s.getHomeTeam();
+    Team o = s.getRoadTeam();
+    if(ha > ra)
+    {
+      r.addWin();
+      o.addLoss(); 
+      }
+      if(ra > ha)
+      {
+        r.addLoss();
+        o.addWin();
+      }
+        System.out.println("The record of " + o.getTeamName() + " is " + o.getWins() + " wins and " + o.getLosses() + " losses");
+        System.out.println("The record of " + r.getTeamName() + " is " + r.getWins() + " wins and " + r.getLosses() + " losses");     
+  }
+}
+  
